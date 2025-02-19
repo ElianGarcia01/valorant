@@ -29,27 +29,45 @@ function Body({ personajes, handleFavorite, openModal }) {
         setPersonajesFiltrados(personajes.filter((personaje) => {
             const coincideTexto = personaje.displayName.toLowerCase()
                 .includes(search.toLowerCase())
-            const coincideRol = roleSeleccionado == "" || personaje.role?.displayName == roleSeleccionado
+            const coincideRol = roleSeleccionado == "" || personaje.role.displayName == roleSeleccionado
             return coincideTexto && coincideRol
         }))
     }, [search, personajes, roleSeleccionado])
 
 
-    // Condicional para mostar Skeletons mientras carga la solicitud fetch
-    const isLoading = personajes.length === 0
-    if (isLoading) {
-        return (
+// Condicional para mostrar Skeletons mientras se cargan los personajes
+const isLoading = personajes.length === 0
+if (isLoading) {
+    return (
+        <div className="flex flex-col gap-6 p-8">
+            {/* Skeleton para el título */}
+            <div className="text-center w-full p-8">
+                <Skeleton height={50} width={300} className="mb-4" />
+                <Skeleton height={30} width={500} />
+            </div>
+
+            {/* Skeleton para los filtros */}
+            <div className="flex justify-center">
+                <div className="flex flex-col md:flex-row justify-around w-full p-4 gap-3">
+                    <Skeleton width={100} height={40} />
+                    <Skeleton width={250} height={40} />
+                    <Skeleton width={250} height={40} />
+                </div>
+            </div>
+
+            {/* Skeleton para las tarjetas */}
             <div className="flex flex-wrap justify-center gap-6 p-8">
-                {Array(9).fill(0).map((_, i) => (
+                {Array(14).fill(0).map((_, i) => (
                     <div key={i} className="w-40 h-56">
                         <Skeleton height={140} width="100%" />
-                        <Skeleton width={100} height={20} />
-                        <Skeleton width={30} height={30} circle />
+                        <Skeleton width="100%" height={20} />
+                        <Skeleton width="50%" height={20} />
                     </div>
                 ))}
             </div>
-        )
-    }
+        </div>
+    )
+}
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-red-900 bg-[url('https://esports.as.com/2020/05/12/valorant/VALORANT_1354374560_392609_1440x810.png')] bg-contain bg-center">
@@ -83,7 +101,7 @@ function Body({ personajes, handleFavorite, openModal }) {
                         className="px-4 py-2 rounded-lg bg-gray-700/70 text-white text-center font-mono font-medium w-full md:w-auto"
                     >
                         <option value="">Select a role</option>
-                        {[...new Set(personajes.filter((personaje) => personaje.role !== null).map((personaje) =>
+                        {[...new Set(personajes.map((personaje) =>
                             personaje.role.displayName))].map((role, index) => (
                                 <option key={index} value={role}>{role}</option>
                             ))}
@@ -116,7 +134,7 @@ function Card({ personaje, handleFavorite }) {
                     src={personaje.displayIcon}
                     alt={personaje.displayName}
                 />
-                <div className="absolute inset-0 bg-black opacity-0 hover:opacity-50 transition-opacity flex items-center justify-center">
+                <div className="absolute inset-0 bg-black opacity-0 hover:opacity-60 transition-opacity flex items-center justify-center">
                     <button
                         className="bg-red-600 px-4 py-2 text-white font-semibold rounded"
                         onClick={() => handleFavorite(personaje.uuid)}
@@ -128,7 +146,6 @@ function Card({ personaje, handleFavorite }) {
                     <h2>{personaje.displayName}</h2>
                 </div>
             </div>
-
         </div>
     )
 }

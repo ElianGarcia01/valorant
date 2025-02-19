@@ -70,6 +70,9 @@ function App() {
     }
   }
 
+  console.log(personajes);
+  
+
   // Función para eliminar un personaje del equipo
   const handleRemove = (id) => {
     setSelectedPersonajes((objeto) =>
