@@ -1,9 +1,14 @@
 function TeamModal({ selectedPersonajes, isModalOpen, closeModal, handleRemove }) {
-    if (!isModalOpen) return null
+    
+    
+    if (!isModalOpen) {
+        return <></> // Retorna un fragmento vacío
+    }
 
     return (
         <div className="fixed inset-0  bg-opacity-90 flex justify-center items-center z-50">
             <div className="bg-sky-900 p-6 rounded-lg w-11/12 max-w-2xl relative">
+                
                 {/* Botón para cerrar el modal */}
                 <button
                     onClick={closeModal}
@@ -18,7 +23,8 @@ function TeamModal({ selectedPersonajes, isModalOpen, closeModal, handleRemove }
                 {/* Lista de personajes seleccionados */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {selectedPersonajes.length === 0 ? (
-                        // Contenedor del mensaje centrado
+                        
+                        // Contenedor del mensaje
                         <div className="col-span-full flex justify-center items-center min-h-[200px]">
                             <p className="text-white text-center font-mono font-semibold">No characters in the team.</p>
                         </div>
@@ -33,6 +39,7 @@ function TeamModal({ selectedPersonajes, isModalOpen, closeModal, handleRemove }
                                 <h3 className="text-white text-center mt-2">
                                     {personaje.displayName}
                                 </h3>
+                                
                                 {/* Botón para eliminar personaje */}
                                 <button
                                     onClick={() => handleRemove(personaje.uuid)}
