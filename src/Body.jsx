@@ -83,9 +83,10 @@ function Body({ personajes, handleFavorite, openModal }) {
                         className="px-4 py-2 rounded-lg bg-gray-700/70 text-white text-center font-mono font-medium w-full md:w-auto"
                     >
                         <option value="">Select a role</option>
-                        {[...new Set(personajes.filter((personaje) => personaje.role !== null).map((personaje) => personaje.role.displayName))].map((role, index) => (
-                            <option key={index} value={role}>{role}</option>
-                        ))}
+                        {[...new Set(personajes.filter((personaje) => personaje.role !== null).map((personaje) =>
+                            personaje.role.displayName))].map((role, index) => (
+                                <option key={index} value={role}>{role}</option>
+                            ))}
                     </select>
                 </div>
             </div>
