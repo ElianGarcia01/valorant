@@ -32,7 +32,7 @@ function TeamModal({ selectedPersonajes, isModalOpen, closeModal, handleRemove }
                         selectedPersonajes.map((personaje) => (
                             <div key={personaje.uuid} className="bg-gray-800 p-4 rounded-lg relative">
                                 <img
-                                    src={personaje.displayIcon}
+                                    src={personaje.fullPortrait}
                                     alt={personaje.displayName}
                                     className="w-full h-32 object-cover rounded-lg"
                                 />
