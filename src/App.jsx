@@ -45,20 +45,20 @@ function App() {
   const handleFavorite = (id) => {
     // Verifica si el personaje ya está en el equipo
     const isAlreadySelected = selectedPersonajes.some((p) => p.uuid === id)
-  
+
     if (isAlreadySelected) {
       // Si ya está en el equipo, muestra un mensaje de advertencia
       toast.warning("Este personaje ya ha sido agregado en el equipo.")
     } else {
       // Si no está en el equipo y hay espacio, lo agrega
       if (selectedPersonajes.length < 5) {
-        
+
         // Encuentra el personaje en la lista de personajes
         const personajeToAdd = personajes.find((p) => p.uuid === id)
-  
+
         // Agrega el personaje al equipo
         setSelectedPersonajes([...selectedPersonajes, personajeToAdd])
-  
+
         // Muestra un mensaje de éxito
         toast.success("Personaje agregado al equipo.")
 
@@ -69,9 +69,6 @@ function App() {
       }
     }
   }
-
-  console.log(personajes);
-  
 
   // Función para eliminar un personaje del equipo
   const handleRemove = (id) => {
